@@ -97,18 +97,56 @@ public class Main {
 
 ### Описание задачи
 
-Создать интерфейс `ComparableCustom<T>`, который гарантирует наличие метода `сравнить`, принимающего объект типа T и возвращающего целое число.
+Создать интерфейс `ComparableCustom<T>` с методом `сравнить`, принимающим объект типа `T` и возвращающим `int`.
 
 Реализовать классы `Number` и `MyString`, реализующие интерфейс с логикой сравнения.
 
-### Как решается задача
+### Код
 
-- Интерфейс объявляет метод `int сравнить(T other)`.
-- Классы `Number` и `MyString` реализуют интерфейс, предоставляя сравнение по значениям.
-- Пользователь вводит два значения, выбирает тип, и получает результат сравнения.
+```java
+public interface ComparableCustom<T> {
+    int сравнить(T other);
+}
 
----
+public class Number implements ComparableCustom<Number> {
+    private final int value;
 
+    public Number(int value) {
+        this.value = value;
+    }
+
+    @Override
+    public int сравнить(Number other) {
+        return Integer.compare(this.value, other.value);
+    }
+}
+
+public class MyString implements ComparableCustom<String> {
+    private final String value;
+
+    public MyString(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public int сравнить(String other) {
+        return this.value.compareTo(other);
+    }
+}
+### Пример ввода
+``` 
+Что будем сравнивать?
+
+    Числа
+
+    Строки
+    Введите номер: 1
+    Введите первое число: 5
+    Введите второе число: 8
+```
+``` 
+undefined
+``` 
 ## Задача 1.3. Коробка чисел и поиск максимума
 
 ### Описание задачи
