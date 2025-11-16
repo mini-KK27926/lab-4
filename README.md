@@ -144,6 +144,7 @@ public class MyString implements ComparableCustom<String> {
     Введите первое число: 5
     Введите второе число: 8
 ```
+### Пример вывода программы
 ``` 
 undefined
 ``` 
