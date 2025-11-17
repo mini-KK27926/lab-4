@@ -131,6 +131,7 @@ public class MyString implements ComparableCustom<String> {
         return this.value.compareTo(other);
     }
 }
+``` 
 ### Пример ввода
 ``` 
 Что будем сравнивать?
