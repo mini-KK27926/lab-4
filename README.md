@@ -317,6 +317,7 @@ zx
 - Примеры: фильтрация строк по длине, чисел по знаку, массивов без положительных элементов.
 
 ---
+### Код
 ```java
  public static <T> List<T> filter(List<T> list, Filter<T> filter) {
         List<T> result = new ArrayList<>();
@@ -392,6 +393,7 @@ zx
 - Метод безопасно работает с пустым списком, возвращая `identity`.
 
 ---
+### Код
 ```java
 public interface Reduce<T> {
     T apply(T a, T b);
