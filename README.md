@@ -254,6 +254,14 @@ interface Function<T, P> {
 
         return result;
     }
+
+public static <T, P> List<P> map(List<T> list, Mapper<T, P> mapper) {
+        List<P> result = new ArrayList<>();
+        for (T item : list) {
+            result.add(mapper.apply(item));
+        }
+        return result;
+    }
 ``` 
 ### Пример ввода
 ``` 
@@ -304,13 +312,27 @@ zx
 котором будут только те массивы, в которых нет ни одного положительного элемента
 ### Решение
 
-- Интерфейс `Filter<T>` с методом `boolean test(T value)`.
+- Создать интерфейс `Filter<T>` с методом `boolean test(T value)`.
 - Возвращать список элементов, для которых `test` возвращает true.
 - Примеры: фильтрация строк по длине, чисел по знаку, массивов без положительных элементов.
 
 ---
+```java
+ public static <T> List<T> filter(List<T> list, Filter<T> filter) {
+        List<T> result = new ArrayList<>();
+        for (T item : list) {
+            if (filter.test(item)) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
 
-## Задача 3.3 Сокращение (reduce)
+public interface Filter<T> {
+    boolean test(T value);
+}
+```
+## Задача 3.3 Сокращение 
 
 ### Описание задачи
 Сокращение.
@@ -331,11 +353,24 @@ zx
 
 ### Решение
 
-- Функциональный интерфейс `Reducer<T>` описывает `T apply(T a, T b)`.
+- Создать интерфейс `Reducer<T>`  с методом `T apply(T a, T b)`.
 - Метод поэтапно аккумулирует результат, начиная с `identity`.
 - Примеры: склейка строк, сумма чисел, подсчёт общего количества элементов во вложенных списках.
 - Метод безопасно работает с пустым списком, возвращая `identity`.
 
 ---
+```java
+public interface Reduce<T> {
+    T apply(T a, T b);
+}
+
+ public static <T> T reduce(List<T> list, T identity, Reduce<T> reducer) {
+        T result = identity;
+        for (T item : list) {
+            result = reducer.apply(result, item);
+        }
+        return result;
+    }
+```
 
 
